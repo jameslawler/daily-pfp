@@ -37,7 +37,7 @@ function App() {
   }, []);
 
   return (
-    <div className="container mx-auto h-screen bg-green-200">
+    <div className="container mx-auto h-dvh bg-green-200">
       <div className="flex flex-col h-1/2 bg-gray-200">
         <div className="flex flex-col flex-1">
           <div className="flex flex-row h-10">
