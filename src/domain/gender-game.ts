@@ -3,6 +3,7 @@ import { Game, Question, QuestionBuilder } from "./game";
 
 export type GenderQuestion = {
   word: string;
+  category: string;
   answer: "male" | "female" | "none";
 };
 
@@ -16,9 +17,11 @@ export class GenderGame {
     for (const rawQuestion of rawQuestions) {
       const question = new QuestionBuilder()
         .setQuestionText(rawQuestion.word)
+        .setQuestionCategory(rawQuestion.category)
         .setAnswerLeftText("feminino")
         .setAnswerRightText("masculino")
         .setAnswerDownText("sem")
+        .setAnswerUpText("ambos")
         .setAnswerDirection(genderAnswerMap[rawQuestion.answer])
         .build();
 

@@ -8,6 +8,11 @@ export class QuestionBuilder {
     this.question = new Question();
   }
 
+  setQuestionCategory(questionCategory: string) {
+    this.question.questionCategory = questionCategory;
+    return this;
+  }
+
   setQuestionText(questionText: string) {
     this.question.questionText = questionText;
     return this;
@@ -45,6 +50,7 @@ export class QuestionBuilder {
 
 export class Question {
   questionText: string;
+  questionCategory: string;
   answerUpText?: string;
   answerDownText?: string;
   answerLeftText?: string;
@@ -53,6 +59,7 @@ export class Question {
 
   constructor() {
     this.questionText = "";
+    this.questionCategory = "";
   }
 
   hasAnswerDirection(direction: Direction) {
