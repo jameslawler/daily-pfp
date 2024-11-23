@@ -10,6 +10,11 @@ export const genderAnswerMap: { [key: string]: Direction } = {
 
 export const genderQuestions: GenderQuestion[] = [
   {
+    word: "nariz",
+    category: "pessoas",
+    answer: "male",
+  },
+  {
     word: "livro",
     category: "office",
     answer: "male",

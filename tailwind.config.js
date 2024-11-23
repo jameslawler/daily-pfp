@@ -6,7 +6,17 @@ export default {
       sm: "640px",
       md: "768px",
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        score: {
+          "0%, 100%": { transform: "scale(1.0)" },
+          "50%": { transform: "scale(1.7)" },
+        },
+      },
+      animation: {
+        score: "score 500ms ease-in-out",
+      },
+    },
   },
   plugins: [],
 };
