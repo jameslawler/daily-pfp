@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 
-import { genderQuestions } from "./domain/data";
-import { GenderGame } from "./domain/gender-game";
-import useGame from "./hooks/use-game";
+import { genderQuestions } from "../domain/data";
+import { GenderGame } from "../domain/gender-game";
 
-import Back from "../public/back.svg";
-import Person from "../public/person.svg";
-import Help from "../public/help.svg";
-import Stats from "../public/stats.svg";
+import useGame from "../hooks/use-game";
+import GameHeader from "../components/GameHeader";
+
+import Person from "/person.svg";
 
 const genderGame = new GenderGame(genderQuestions);
 
-function App() {
+function Game() {
   const {
     startGame,
     answerQuestion,
@@ -23,6 +22,7 @@ function App() {
 
   const [seconds] = useState(14);
   const [scoreEffect, setScoreEffect] = useState("");
+  const [plusoneEffect, setPlusoneEffect] = useState("hidden");
 
   useEffect(() => {
     // const interval = setInterval(() => {
@@ -39,26 +39,14 @@ function App() {
 
   useEffect(() => {
     setScoreEffect("animate-score");
+    setPlusoneEffect("animate-plusone");
   }, [currentQuestion]);
 
   return (
-    <div className="container mx-auto h-dvh bg-green-200">
+    <div className="container mx-auto h-dvh">
       <div className="flex flex-col h-1/2 bg-gray-200">
         <div className="flex flex-col flex-1">
-          <div className="flex flex-row h-10">
-            <div className="cursor-pointer hover:bg-gray-100">
-              <img src={Back} className="w-10 h-10" />
-            </div>
-            <div className="flex flex-1 justify-center items-center">
-              <span className="text-xl font-bold">Feminino ou Masculino</span>
-            </div>
-            <div className="cursor-pointer hover:bg-gray-100">
-              <img src={Stats} className="w-10 h-10" />
-            </div>
-            <div className="cursor-pointer hover:bg-gray-100">
-              <img src={Help} className="w-10 h-10" />
-            </div>
-          </div>
+          <GameHeader />
           <div className="flex flex-row h-12 items-center mx-4">
             <div className="flex flex-row flex-1 ">
               <span className="mr-2">Top Score:</span>
@@ -83,9 +71,15 @@ function App() {
                 {currentQuestion.questionCategory}
               </span>
             </div>
-            <div className="mt-8">
+            <div className="relative mt-8">
               <span className="text-5xl font-bold">
                 {currentQuestion.questionText}
+              </span>
+              <span
+                className={`${plusoneEffect} absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-2xl text-green-500 font-bold`}
+                onAnimationEnd={() => setPlusoneEffect("hidden")}
+              >
+                + 1
               </span>
             </div>
           </div>
@@ -144,4 +138,4 @@ function App() {
   );
 }
 
-export default App;
+export default Game;
