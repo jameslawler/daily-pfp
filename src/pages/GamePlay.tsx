@@ -7,6 +7,7 @@ import useGame from "../hooks/use-game";
 import GameHeader from "../components/GameHeader";
 
 import Person from "/person.svg";
+import GameModal from "../components/GameModal";
 
 const genderGame = new GenderGame(genderQuestions);
 
@@ -16,7 +17,7 @@ function Game() {
     answerQuestion,
     currentQuestion,
     questionIndex,
-    // gameState,
+    gameState,
     // numberOfQuestions,
   } = useGame(genderGame.game);
 
@@ -134,6 +135,21 @@ function Game() {
           </span>
         </div>
       </div>
+      {gameState === "ended" && (
+        <GameModal header="Game Over">
+          <div className="flex flex-col gap-4 p-4">
+            <span>
+              Come back tomorrow to play again and try and beat your top score!
+            </span>
+            <span>Use the Study page to prepare.</span>
+            <span>10 hrs 23 mins 15 secs until the next game</span>
+            <div>
+              Want more material to learn Portuguese? check out our books and
+              help support our site.
+            </div>
+          </div>
+        </GameModal>
+      )}
     </div>
   );
 }
