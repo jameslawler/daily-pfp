@@ -1,6 +1,13 @@
 import { genderAnswerMap } from "./data";
 import { Game, Question, QuestionBuilder } from "./game";
 
+export type GenderItem = {
+  word: string;
+  category: string;
+  isPlural: boolean;
+  gender: "male" | "female" | "none" | "both";
+};
+
 export type GenderQuestion = {
   word: string;
   category: string;

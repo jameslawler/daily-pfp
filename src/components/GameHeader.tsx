@@ -8,7 +8,7 @@ function GameHeader() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-row h-10">
+    <div className="flex flex-row h-10 my-2">
       <div
         className="cursor-pointer hover:bg-gray-100"
         onClick={() => navigate(-1)}
