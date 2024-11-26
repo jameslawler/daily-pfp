@@ -10,7 +10,6 @@ const useGame = (game: Game) => {
   );
   const [gameState, setGameState] = useState<GameState>("waiting");
   const [isPerfectGame, setIsPerfectGame] = useState<boolean>(false);
-  const [isFirstGame, setIsFirstGame] = useState<boolean>(true);
   const [localStorageValue, setLocalStorageValue] = useLocalStorage(
     "gender-game",
     "{}"
@@ -40,7 +39,6 @@ const useGame = (game: Game) => {
     setCurrentQuestion(game.currentQuestion());
     setGameState(game.gameState);
     setIsPerfectGame(game.isPerfectGame());
-    setIsFirstGame(game.isFirstGame);
   };
 
   const answerQuestion = (direction: Direction) => {
@@ -83,7 +81,6 @@ const useGame = (game: Game) => {
     gameState,
     seconds,
     isPerfectGame,
-    isFirstGame,
   };
 };
 

@@ -21,16 +21,13 @@ function Game() {
     gameState,
     seconds,
     isPerfectGame,
-    isFirstGame,
   } = useGame(genderGame.game);
 
   const [scoreEffect, setScoreEffect] = useState("");
   const [plusoneEffect, setPlusoneEffect] = useState("hidden");
 
   useEffect(() => {
-    if (!isFirstGame) {
-      startGame();
-    }
+    startGame();
   }, []);
 
   useEffect(() => {
@@ -224,27 +221,6 @@ function Game() {
                 Statistics
               </div>
             </Link>
-          </div>
-        </GameModal>
-      )}
-      {isFirstGame && (
-        <GameModal>
-          <div className="flex flex-col gap-4 p-4">
-            <span className="text-2xl font-bold text-center">First time</span>
-            <span>Rules</span>
-            <span>- Play until your first mistake</span>
-            <span>- New set of words every day</span>
-            <span>- Maximum 30 seconds per word to give an answer</span>
-          </div>
-          <div className="flex flex-row gap-4 justify-center items-center p-4">
-            <div
-              className="flex justify-center items-center bg-blue-800 text-white w-28 h-10 rounded-full cursor-pointer"
-              onClick={() => {
-                startGame();
-              }}
-            >
-              <span className="text-xl">Start</span>
-            </div>
           </div>
         </GameModal>
       )}

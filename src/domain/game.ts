@@ -81,19 +81,16 @@ export class Game {
   questionIndex: number;
   gameState: GameState;
   startTime?: number;
-  isFirstGame: boolean;
 
   constructor(questions: Question[]) {
     this.questions = questions;
     this.questionIndex = 0;
     this.gameState = "waiting";
-    this.isFirstGame = true;
   }
 
   start() {
     this.startTime = Date.now();
     this.gameState = "running";
-    this.isFirstGame = false;
   }
 
   answer(direction: Direction) {
@@ -133,11 +130,6 @@ export class Game {
     lastQuestionIndex: number;
     gameState: GameState;
   }) {
-    if (!localStorage.lastGame) {
-      this.isFirstGame = true;
-      return;
-    }
-
     const currentDate = new Date().toISOString().split("T")[0];
 
     if (localStorage.lastGame !== currentDate) {
