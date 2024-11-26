@@ -8,6 +8,7 @@ import GameHeader from "../components/GameHeader";
 
 import Person from "/person.svg";
 import GameModal from "../components/GameModal";
+import { Link } from "react-router";
 
 const genderGame = new GenderGame(genderQuestions);
 
@@ -20,19 +21,48 @@ function Game() {
     gameState,
     seconds,
     isPerfectGame,
+    isFirstGame,
   } = useGame(genderGame.game);
 
   const [scoreEffect, setScoreEffect] = useState("");
   const [plusoneEffect, setPlusoneEffect] = useState("hidden");
 
   useEffect(() => {
-    startGame();
+    if (!isFirstGame) {
+      startGame();
+    }
   }, []);
 
   useEffect(() => {
     setScoreEffect("animate-score");
     setPlusoneEffect("animate-plusone");
   }, [currentQuestion]);
+
+  const getAnswerText = () => {
+    switch (currentQuestion.answerDirection) {
+      case "up":
+        return currentQuestion.answerUpText;
+      case "down":
+        return currentQuestion.answerDownText;
+      case "left":
+        return currentQuestion.answerLeftText;
+      case "right":
+        return currentQuestion.answerRightText;
+    }
+  };
+
+  const getAnswerBackgroundColor = () => {
+    switch (currentQuestion.answerDirection) {
+      case "up":
+        return "bg-violet-400";
+      case "down":
+        return "bg-orange-400";
+      case "left":
+        return "bg-red-400";
+      case "right":
+        return "bg-blue-400";
+    }
+  };
 
   return (
     <div className="container mx-auto h-dvh">
@@ -84,11 +114,11 @@ function Game() {
         </div>
         <div className="h-2 bg-gray-200">
           <div
-            className="h-2 bg-blue-600 transition-transform ease-linear duration-1000"
+            className={`h-2 bg-blue-600 ${
+              seconds > 0 ? "transition-width ease-linear duration-1000" : ""
+            }`}
             style={{
-              transform: `translateX(${
-                Number((seconds / 30).toFixed(2)) * 100 - 100
-              }%)`,
+              width: `${Number((seconds / 30).toFixed(2)) * 100}%`,
             }}
           ></div>
         </div>
@@ -130,18 +160,21 @@ function Game() {
       {gameState === "ended" && !isPerfectGame && (
         <GameModal>
           <div className="flex flex-col gap-4 p-4">
-            <span className="text-2xl font-bold text-center">
-              Whoops, que pena!
-            </span>
-            <span>
+            <span className="text-2xl font-bold text-center">Game Over</span>
+            <div className="flex flex-col gap-2 my-4">
+              <span className="text-center">The correct answer is</span>
+              <span
+                className={`${getAnswerBackgroundColor()} text-xl text-center font-bold py-4`}
+              >
+                {currentQuestion.questionText} - {getAnswerText()}
+              </span>
+            </div>
+            <span className="text-center">
               You answered {questionIndex}{" "}
               {questionIndex === 1 ? "word" : "words"} correctly today
             </span>
-            <span className="text-center">
-              {currentQuestion.questionText} - {currentQuestion.answerDirection}
-            </span>
-            <span>New game starts in 07 hrs 23 mins</span>
-            <div className="border border-gray-300 text-sm p-2">
+            <span className="text-center">New game in 07 hrs 23 mins</span>
+            <div className="bg-gray-100 border border-gray-300 text-sm my-4 p-2">
               <span>
                 <a href="https://www.portuguesefromportugal.com/books">
                   Check out our Portuguese learning books available on Amazon
@@ -149,6 +182,18 @@ function Game() {
                 </a>
               </span>
             </div>
+          </div>
+          <div className="flex flex-row gap-4 justify-center items-center p-4">
+            <Link to="study">
+              <div className="flex justify-center items-center bg-blue-800 text-white w-28 h-10 rounded-full cursor-pointer">
+                <span className="text-xl">Study</span>
+              </div>
+            </Link>
+            <Link to="stats">
+              <div className="flex justify-center items-center bg-gray-100 border border-black text-black w-28 h-10 rounded-full cursor-pointer">
+                Statistics
+              </div>
+            </Link>
           </div>
         </GameModal>
       )}
@@ -159,13 +204,46 @@ function Game() {
             <span>You got a perfect score.</span>
             <span>Can you do it again tomorrow and start a golden streak?</span>
             <span>New game starts in 07 hrs 23 mins</span>
-            <div className="border border-gray-300 text-sm p-2">
+            <div className="bg-gray-200 border border-gray-300 text-sm p-2">
               <span>
                 <a href="https://www.portuguesefromportugal.com/books">
                   Check out our Portuguese learning books available on Amazon
                   and help support our site.
                 </a>
               </span>
+            </div>
+          </div>
+          <div className="flex flex-row gap-4 justify-center items-center p-4">
+            <Link to="study">
+              <div className="flex justify-center items-center bg-blue-800 text-white w-28 h-10 rounded-full cursor-pointer">
+                <span className="text-xl">Study</span>
+              </div>
+            </Link>
+            <Link to="stats">
+              <div className="flex justify-center items-center bg-gray-100 border border-black text-black w-28 h-10 rounded-full cursor-pointer">
+                Statistics
+              </div>
+            </Link>
+          </div>
+        </GameModal>
+      )}
+      {isFirstGame && (
+        <GameModal>
+          <div className="flex flex-col gap-4 p-4">
+            <span className="text-2xl font-bold text-center">First time</span>
+            <span>Rules</span>
+            <span>- Play until your first mistake</span>
+            <span>- New set of words every day</span>
+            <span>- Maximum 30 seconds per word to give an answer</span>
+          </div>
+          <div className="flex flex-row gap-4 justify-center items-center p-4">
+            <div
+              className="flex justify-center items-center bg-blue-800 text-white w-28 h-10 rounded-full cursor-pointer"
+              onClick={() => {
+                startGame();
+              }}
+            >
+              <span className="text-xl">Start</span>
             </div>
           </div>
         </GameModal>

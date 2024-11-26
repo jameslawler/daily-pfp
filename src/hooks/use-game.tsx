@@ -10,6 +10,7 @@ const useGame = (game: Game) => {
   );
   const [gameState, setGameState] = useState<GameState>("waiting");
   const [isPerfectGame, setIsPerfectGame] = useState<boolean>(false);
+  const [isFirstGame, setIsFirstGame] = useState<boolean>(true);
   const [localStorageValue, setLocalStorageValue] = useLocalStorage(
     "gender-game",
     "{}"
@@ -39,6 +40,7 @@ const useGame = (game: Game) => {
     setCurrentQuestion(game.currentQuestion());
     setGameState(game.gameState);
     setIsPerfectGame(game.isPerfectGame());
+    setIsFirstGame(game.isFirstGame);
   };
 
   const answerQuestion = (direction: Direction) => {
@@ -47,6 +49,7 @@ const useGame = (game: Game) => {
     }
 
     game.answer(direction);
+    setSeconds(0);
     updateState();
     setLocalStorageValue({
       lastGame: currentDate.toISOString().split("T")[0],
@@ -64,6 +67,10 @@ const useGame = (game: Game) => {
     updateState();
 
     setInterval(() => {
+      if (game.gameState !== "running") {
+        return;
+      }
+
       setSeconds((oldCount) => (oldCount === 30 ? 30 : oldCount + 1));
     }, 1000);
   };
@@ -74,9 +81,9 @@ const useGame = (game: Game) => {
     questionIndex,
     currentQuestion,
     gameState,
-    numberOfQuestions: game.questions.length,
     seconds,
     isPerfectGame,
+    isFirstGame,
   };
 };
 
