@@ -114,15 +114,22 @@ export class Game {
     return this.questions[this.questionIndex];
   }
 
+  setExpired() {
+    this.gameState = "ended";
+  }
+
+  isPerfectGame() {
+    return (
+      this.gameState === "ended" &&
+      this.questionIndex === this.questions.length - 1
+    );
+  }
+
   loadFromStorage(localStorage: {
     lastGame: string;
     lastQuestionIndex: number;
     gameState: GameState;
   }) {
-    if (!localStorage.lastQuestionIndex || !localStorage.gameState) {
-      return;
-    }
-
     const currentDate = new Date().toISOString().split("T")[0];
 
     if (localStorage.lastGame !== currentDate) {

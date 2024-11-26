@@ -18,23 +18,14 @@ function Game() {
     currentQuestion,
     questionIndex,
     gameState,
-    // numberOfQuestions,
+    seconds,
+    isPerfectGame,
   } = useGame(genderGame.game);
 
-  const [seconds] = useState(14);
   const [scoreEffect, setScoreEffect] = useState("");
   const [plusoneEffect, setPlusoneEffect] = useState("hidden");
 
   useEffect(() => {
-    // const interval = setInterval(() => {
-    //   setSeconds((oldCount) => oldCount + 1);
-    // }, 1000);
-
-    // setTimeout(() => {
-    //   clearInterval(interval);
-    // }, 30000);
-
-    // return () => clearInterval(interval);
     startGame();
   }, []);
 
@@ -86,7 +77,8 @@ function Game() {
           </div>
           <div className="flex h-14 justify-center items-center">
             <span className="text-sm">
-              Falta <span className="font-bold">{30 - seconds}</span> segundos
+              <span className="font-bold">{30 - seconds}</span> seconds
+              remaining
             </span>
           </div>
         </div>
@@ -135,17 +127,45 @@ function Game() {
           </span>
         </div>
       </div>
-      {gameState === "ended" && (
-        <GameModal header="Game Over">
+      {gameState === "ended" && !isPerfectGame && (
+        <GameModal>
           <div className="flex flex-col gap-4 p-4">
-            <span>
-              Come back tomorrow to play again and try and beat your top score!
+            <span className="text-2xl font-bold text-center">
+              Whoops, que pena!
             </span>
-            <span>Use the Study page to prepare.</span>
-            <span>10 hrs 23 mins 15 secs until the next game</span>
-            <div>
-              Want more material to learn Portuguese? check out our books and
-              help support our site.
+            <span>
+              You answered {questionIndex}{" "}
+              {questionIndex === 1 ? "word" : "words"} correctly today
+            </span>
+            <span className="text-center">
+              {currentQuestion.questionText} - {currentQuestion.answerDirection}
+            </span>
+            <span>New game starts in 07 hrs 23 mins</span>
+            <div className="border border-gray-300 text-sm p-2">
+              <span>
+                <a href="https://www.portuguesefromportugal.com/books">
+                  Check out our Portuguese learning books available on Amazon
+                  and help support our site.
+                </a>
+              </span>
+            </div>
+          </div>
+        </GameModal>
+      )}
+      {gameState === "ended" && isPerfectGame && (
+        <GameModal>
+          <div className="flex flex-col gap-4 p-4">
+            <span className="text-2xl font-bold text-center">Muito bom!</span>
+            <span>You got a perfect score.</span>
+            <span>Can you do it again tomorrow and start a golden streak?</span>
+            <span>New game starts in 07 hrs 23 mins</span>
+            <div className="border border-gray-300 text-sm p-2">
+              <span>
+                <a href="https://www.portuguesefromportugal.com/books">
+                  Check out our Portuguese learning books available on Amazon
+                  and help support our site.
+                </a>
+              </span>
             </div>
           </div>
         </GameModal>
