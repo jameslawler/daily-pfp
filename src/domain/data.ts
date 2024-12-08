@@ -1,47 +1,13 @@
-import { Direction } from "./game";
-import { GenderItem, GenderQuestion } from "./gender-game";
+export type Gender = "male" | "female" | "both" | "none";
 
-export const genderAnswerMap: { [key: string]: Direction } = {
-  male: "right",
-  female: "left",
-  none: "down",
-  both: "up",
+export type GameData = {
+  word: string;
+  category: string;
+  isPlural: boolean;
+  gender: Gender;
 };
 
-export const genderQuestions: GenderQuestion[] = [
-  {
-    word: "nariz",
-    category: "pessoas",
-    answer: "male",
-  },
-  {
-    word: "livro",
-    category: "office",
-    answer: "male",
-  },
-  {
-    word: "mala",
-    category: "furniture",
-    answer: "female",
-  },
-  {
-    word: "cantea",
-    category: "furniture",
-    answer: "female",
-  },
-  {
-    word: "papel",
-    category: "office",
-    answer: "male",
-  },
-  {
-    word: "sala",
-    category: "locations",
-    answer: "female",
-  },
-];
-
-export const genderItems: GenderItem[] = [
+export const data: GameData[] = [
   {
     word: "nariz",
     category: "pessoas",

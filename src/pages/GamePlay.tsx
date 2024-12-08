@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 
-import { genderQuestions } from "../domain/data";
-import { GenderGame } from "../domain/gender-game";
-
 import useGame from "../hooks/use-game";
 import GameHeader from "../components/GameHeader";
 
 import Person from "/person.svg";
 import GameModal from "../components/GameModal";
 import { Link } from "react-router";
+import { DailyGame } from "../domain/daily-game";
+import { getGameQuestions } from "../domain/data-repository";
 
-const genderGame = new GenderGame(genderQuestions);
-
+const genderGame = new DailyGame(getGameQuestions());
 function Game() {
   const {
     startGame,
@@ -21,7 +19,7 @@ function Game() {
     gameState,
     seconds,
     isPerfectGame,
-  } = useGame(genderGame.game);
+  } = useGame(genderGame);
 
   const [scoreEffect, setScoreEffect] = useState("");
   const [plusoneEffect, setPlusoneEffect] = useState("hidden");
@@ -35,31 +33,11 @@ function Game() {
     setPlusoneEffect("animate-plusone");
   }, [currentQuestion]);
 
-  const getAnswerText = () => {
-    switch (currentQuestion.answerDirection) {
-      case "up":
-        return currentQuestion.answerUpText;
-      case "down":
-        return currentQuestion.answerDownText;
-      case "left":
-        return currentQuestion.answerLeftText;
-      case "right":
-        return currentQuestion.answerRightText;
-    }
-  };
+  const getAnswerText = () =>
+    currentQuestion.answers.find((answer) => answer.isCorrect)?.text;
 
-  const getAnswerBackgroundColor = () => {
-    switch (currentQuestion.answerDirection) {
-      case "up":
-        return "bg-violet-400";
-      case "down":
-        return "bg-orange-400";
-      case "left":
-        return "bg-red-400";
-      case "right":
-        return "bg-blue-400";
-    }
-  };
+  const getAnswerBackgroundColor = () =>
+    currentQuestion.answers.find((answer) => answer.isCorrect)?.color;
 
   return (
     <div className="container mx-auto h-dvh">
@@ -121,38 +99,14 @@ function Game() {
         </div>
       </div>
       <div className="grid grid-cols-2 grid-rows-2 h-1/2 bg-white">
-        <div
-          className="flex flex-col bg-red-400 justify-center items-center cursor-pointer"
-          onClick={() => answerQuestion("left")}
-        >
-          <span className="text-2xl font-bold">
-            {currentQuestion.answerLeftText}
-          </span>
-        </div>
-        <div
-          className="flex flex-col bg-blue-400 justify-center items-center cursor-pointer"
-          onClick={() => answerQuestion("right")}
-        >
-          <span className="text-2xl font-bold">
-            {currentQuestion.answerRightText}
-          </span>
-        </div>
-        <div
-          className="flex flex-col bg-orange-400 justify-center items-center cursor-pointer"
-          onClick={() => answerQuestion("down")}
-        >
-          <span className="text-2xl font-bold">
-            {currentQuestion.answerDownText}
-          </span>
-        </div>
-        <div
-          className="flex flex-col bg-violet-400 justify-center items-center cursor-pointer"
-          onClick={() => answerQuestion("up")}
-        >
-          <span className="text-2xl font-bold">
-            {currentQuestion.answerUpText}
-          </span>
-        </div>
+        {currentQuestion.answers.map((answer, answerIndex) => (
+          <div
+            className={`flex flex-col ${answer.color} justify-center items-center cursor-pointer`}
+            onClick={() => answerQuestion(answerIndex)}
+          >
+            <span className="text-2xl font-bold">{answer.text}</span>
+          </div>
+        ))}
       </div>
       {gameState === "ended" && !isPerfectGame && (
         <GameModal>

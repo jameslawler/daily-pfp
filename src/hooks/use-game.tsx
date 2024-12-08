@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Direction, Game, GameState, Question } from "../domain/game";
 import { useLocalStorage } from "./use-local-storage";
+import { DailyGame, GameState } from "../domain/daily-game";
+import { GameQuestion } from "../domain/data-repository";
 
-const useGame = (game: Game) => {
+const useGame = (game: DailyGame) => {
   const [seconds, setSeconds] = useState(0);
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState<Question>(
+  const [currentQuestion, setCurrentQuestion] = useState<GameQuestion>(
     game.questions[0]
   );
   const [gameState, setGameState] = useState<GameState>("waiting");
@@ -41,12 +42,12 @@ const useGame = (game: Game) => {
     setIsPerfectGame(game.isPerfectGame());
   };
 
-  const answerQuestion = (direction: Direction) => {
+  const answerQuestion = (answerIndex: number) => {
     if (gameState !== "running") {
       return;
     }
 
-    game.answer(direction);
+    game.answer(answerIndex);
     setSeconds(0);
     updateState();
     setLocalStorageValue({
