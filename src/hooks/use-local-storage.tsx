@@ -4,7 +4,7 @@ function getStorageValue(key: string, defaultValue: string) {
   const saved = localStorage.getItem(key);
 
   if (!saved) {
-    return defaultValue;
+    return JSON.parse(defaultValue);
   }
 
   const initial = JSON.parse(saved);

@@ -2,12 +2,24 @@
 
 todo
 
-- study page
-- next game countdown clock
-- top score number
-- colors of buttons
-- statistics page
+- DONE study page
+- DONE next game countdown clock
+- DONE top score number
+- DONE colors of buttons
+- STARTED statistics page
 - load words
+
+Statistics
+
+- key: "gender-game-statistics"
+- value:
+  {
+  topScore: number,
+  pastGames: [{
+  date: string,
+  score: number,
+  }]
+  }
 
 Architecture
 
@@ -19,7 +31,4 @@ Game Study (fixed format)
 2. Create Game by providing Game Question aray and current state
 3. Create Game Study array by loading all Game Data into Game Study format
 
-
-----
-
-
+---

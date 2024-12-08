@@ -8,6 +8,8 @@ import GameModal from "../components/GameModal";
 import { Link } from "react-router";
 import { DailyGame } from "../domain/daily-game";
 import { getGameQuestions } from "../domain/data-repository";
+import { useCountdown } from "../hooks/use-countdown";
+import useGameStats from "../hooks/use-game-stats";
 
 const genderGame = new DailyGame(getGameQuestions());
 function Game() {
@@ -15,17 +17,20 @@ function Game() {
     startGame,
     answerQuestion,
     currentQuestion,
-    questionIndex,
+    currentScore,
     gameState,
     seconds,
     isPerfectGame,
   } = useGame(genderGame);
+  const { topScore } = useGameStats();
 
   const [scoreEffect, setScoreEffect] = useState("");
   const [plusoneEffect, setPlusoneEffect] = useState("hidden");
+  const { setEnabled, timeRemainingFormatted } = useCountdown();
 
   useEffect(() => {
     startGame();
+    setEnabled(true);
   }, []);
 
   useEffect(() => {
@@ -47,7 +52,7 @@ function Game() {
           <div className="flex flex-row h-12 items-center mx-4">
             <div className="flex flex-row flex-1 ">
               <span className="mr-2">Top Score:</span>
-              <div className="font-bold">23</div>
+              <div className="font-bold">{topScore}</div>
             </div>
             <div className="flex flex-row flex-1 justify-end">
               <span className="mr-2">Score:</span>
@@ -55,7 +60,7 @@ function Game() {
                 className={`${scoreEffect} font-bold`}
                 onAnimationEnd={() => setScoreEffect("")}
               >
-                {questionIndex + 1}
+                {currentScore}
               </div>
             </div>
           </div>
@@ -121,10 +126,12 @@ function Game() {
               </span>
             </div>
             <span className="text-center">
-              You answered {questionIndex}{" "}
-              {questionIndex === 1 ? "word" : "words"} correctly today
+              You answered {currentScore}{" "}
+              {currentScore === 1 ? "word" : "words"} correctly today
             </span>
-            <span className="text-center">New game in 07 hrs 23 mins</span>
+            <span className="text-center">
+              New game in {timeRemainingFormatted}
+            </span>
             <div className="bg-gray-100 border border-gray-300 text-sm my-4 p-2">
               <span>
                 <a href="https://www.portuguesefromportugal.com/books">
@@ -154,7 +161,7 @@ function Game() {
             <span className="text-2xl font-bold text-center">Muito bom!</span>
             <span>You got a perfect score.</span>
             <span>Can you do it again tomorrow and start a golden streak?</span>
-            <span>New game starts in 07 hrs 23 mins</span>
+            <span>New game starts in {timeRemainingFormatted}</span>
             <div className="bg-gray-200 border border-gray-300 text-sm p-2">
               <span>
                 <a href="https://www.portuguesefromportugal.com/books">

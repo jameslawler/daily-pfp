@@ -5,29 +5,33 @@ import { GameQuestion } from "../domain/data-repository";
 
 const useGame = (game: DailyGame) => {
   const [seconds, setSeconds] = useState(0);
-  const [questionIndex, setQuestionIndex] = useState(0);
+  const [currentScore, setCurrentScore] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState<GameQuestion>(
     game.questions[0]
   );
   const [gameState, setGameState] = useState<GameState>("waiting");
   const [isPerfectGame, setIsPerfectGame] = useState<boolean>(false);
-  const [localStorageValue, setLocalStorageValue] = useLocalStorage(
+  const [gameStorageValue, setGameStorageValue] = useLocalStorage(
     "gender-game",
     "{}"
+  );
+  const [statsLocalStorage, setStatsLocalStorage] = useLocalStorage(
+    "gender-game-stats",
+    `{ "topScore": 0, "pastGames": [] }`
   );
 
   const currentDate = new Date();
 
   useEffect(() => {
-    game.loadFromStorage(localStorageValue);
+    game.loadFromStorage(gameStorageValue);
     updateState();
-  }, [localStorageValue]);
+  }, [gameStorageValue]);
 
   useEffect(() => {
     if (seconds === 30) {
       game.setExpired();
       updateState();
-      setLocalStorageValue({
+      setGameStorageValue({
         lastGame: currentDate.toISOString().split("T")[0],
         lastQuestionIndex: game.questionIndex,
         gameState: game.gameState,
@@ -36,10 +40,38 @@ const useGame = (game: DailyGame) => {
   }, [seconds]);
 
   const updateState = () => {
-    setQuestionIndex(game.questionIndex);
+    const score = game.isPerfectGame()
+      ? game.questionIndex + 1
+      : game.questionIndex;
+
+    setCurrentScore(score);
     setCurrentQuestion(game.currentQuestion());
     setGameState(game.gameState);
     setIsPerfectGame(game.isPerfectGame());
+  };
+
+  type PastGame = {
+    date: string;
+    score: number;
+  };
+
+  const updatePastGames = (pastGames: PastGame[], currentScore: number) => {
+    const currentDate = new Date().toISOString().split("T")[0];
+    const hasCurrentGame = !!pastGames.find(
+      (game) => game.date === currentDate
+    );
+
+    if (!hasCurrentGame) {
+      return [...pastGames, { date: currentDate, score: currentScore }];
+    } else {
+      return pastGames.map((game) => {
+        if (game.date === currentDate) {
+          return { date: currentDate, score: currentScore };
+        } else {
+          return game;
+        }
+      });
+    }
   };
 
   const answerQuestion = (answerIndex: number) => {
@@ -50,10 +82,18 @@ const useGame = (game: DailyGame) => {
     game.answer(answerIndex);
     setSeconds(0);
     updateState();
-    setLocalStorageValue({
+
+    setGameStorageValue({
       lastGame: currentDate.toISOString().split("T")[0],
       lastQuestionIndex: game.questionIndex,
       gameState: game.gameState,
+    });
+    setStatsLocalStorage({
+      topScore:
+        currentScore > statsLocalStorage.topScore
+          ? currentScore
+          : statsLocalStorage.topScore,
+      pastGames: updatePastGames(statsLocalStorage.pastGames, currentScore),
     });
   };
 
@@ -77,7 +117,7 @@ const useGame = (game: DailyGame) => {
   return {
     startGame,
     answerQuestion,
-    questionIndex,
+    currentScore,
     currentQuestion,
     gameState,
     seconds,
