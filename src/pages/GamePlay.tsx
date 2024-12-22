@@ -11,7 +11,8 @@ import { getGameQuestions } from "../domain/data-repository";
 import { useCountdown } from "../hooks/use-countdown";
 import useGameStats from "../hooks/use-game-stats";
 
-const genderGame = new DailyGame(getGameQuestions());
+const todayString = new Date().toISOString().split("T")[0];
+const genderGame = new DailyGame(getGameQuestions(new Date(todayString)));
 function Game() {
   const {
     startGame,

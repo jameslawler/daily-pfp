@@ -6,8 +6,9 @@ todo
 - DONE next game countdown clock
 - DONE top score number
 - DONE colors of buttons
-- STARTED statistics page
+- DONE statistics page
 - load words
+- DONE change list daily
 
 Statistics
 

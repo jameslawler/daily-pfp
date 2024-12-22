@@ -25,33 +25,63 @@ const getColorByGender = (gender: Gender) => {
   }
 };
 
-export const getGameQuestions = (): GameQuestion[] =>
-  data.map((item) => ({
-    questionCategory: item.category,
-    questionText: item.word,
-    answers: [
-      {
-        text: "feminino",
-        color: getColorByGender("female"),
-        isCorrect: item.gender === "female",
-      },
-      {
-        text: "masculino",
-        color: getColorByGender("male"),
-        isCorrect: item.gender === "male",
-      },
-      {
-        text: "sem",
-        color: getColorByGender("none"),
-        isCorrect: item.gender === "none",
-      },
-      {
-        text: "ambos",
-        color: getColorByGender("both"),
-        isCorrect: item.gender === "both",
-      },
-    ],
-  }));
+const shuffleArray = (array: GameData[], seed: number): GameData[] => {
+  let currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
+  seed = seed || 1;
+
+  const random = function () {
+    const x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+  };
+
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(random() * currentIndex);
+    currentIndex -= 1;
+
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+};
+
+const WORDS_PER_GAME = 100;
+
+export const getGameQuestions = (date: Date): GameQuestion[] => {
+  const shuffleData = shuffleArray(data, date.getTime());
+
+  return shuffleData
+    .filter((_, index) => index < WORDS_PER_GAME)
+    .map((item) => ({
+      questionCategory: item.category,
+      questionText: item.word,
+      answers: [
+        {
+          text: "feminino",
+          color: getColorByGender("female"),
+          isCorrect: item.gender === "female",
+        },
+        {
+          text: "masculino",
+          color: getColorByGender("male"),
+          isCorrect: item.gender === "male",
+        },
+        {
+          text: "sem",
+          color: getColorByGender("none"),
+          isCorrect: item.gender === "none",
+        },
+        {
+          text: "ambos",
+          color: getColorByGender("both"),
+          isCorrect: item.gender === "both",
+        },
+      ],
+    }));
+};
 
 type StudyGameData = {
   word: string;
