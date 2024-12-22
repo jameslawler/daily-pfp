@@ -511,7 +511,7 @@ export const data: GameData[] = [
     wordEnglish: "colleague",
     category: "Relationships",
     isPlural: false,
-    gender: "male",
+    gender: "both",
   },
   {
     word: "casal",
@@ -561,6 +561,13 @@ export const data: GameData[] = [
     category: "Relationships",
     isPlural: false,
     gender: "female",
+  },
+  {
+    word: "estudante",
+    wordEnglish: "student",
+    category: "Relationships",
+    isPlural: false,
+    gender: "both",
   },
   {
     word: "natal",
