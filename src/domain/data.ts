@@ -798,28 +798,7 @@ export const data: GameData[] = [
     wordEnglish: "bald",
     category: "Hair",
     isPlural: false,
-    gender: "none",
-  },
-  {
-    word: "preto",
-    wordEnglish: "black",
-    category: "Hair",
-    isPlural: false,
-    gender: "none",
-  },
-  {
-    word: "louro",
-    wordEnglish: "blonde",
-    category: "Hair",
-    isPlural: false,
-    gender: "none",
-  },
-  {
-    word: "castanho",
-    wordEnglish: "brunette",
-    category: "Hair",
-    isPlural: false,
-    gender: "none",
+    gender: "both",
   },
   {
     word: "escova",
@@ -836,13 +815,6 @@ export const data: GameData[] = [
     gender: "male",
   },
   {
-    word: "encaracolado",
-    wordEnglish: "curly",
-    category: "Hair",
-    isPlural: false,
-    gender: "none",
-  },
-  {
     word: "caspa",
     wordEnglish: "dandruff",
     category: "Hair",
@@ -855,13 +827,6 @@ export const data: GameData[] = [
     category: "Hair",
     isPlural: false,
     gender: "female",
-  },
-  {
-    word: "branco",
-    wordEnglish: "white",
-    category: "Hair",
-    isPlural: false,
-    gender: "none",
   },
   {
     word: "alergia",
