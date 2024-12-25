@@ -2,6 +2,7 @@ import { data, GameData, Gender } from "./data";
 
 type GameQuestionAnswer = {
   text: string;
+  subText: string;
   color: string;
   isCorrect: boolean;
 };
@@ -61,21 +62,27 @@ export const getGameQuestions = (date: Date): GameQuestion[] => {
       answers: [
         {
           text: "feminino",
+          subText: `${item.isPlural ? "as" : "a"} ${item.word}`,
           color: getColorByGender("female"),
           isCorrect: item.gender === "female",
         },
         {
           text: "masculino",
+          subText: `${item.isPlural ? "os" : "o"} ${item.word}`,
           color: getColorByGender("male"),
           isCorrect: item.gender === "male",
         },
         {
           text: "sem",
+          subText: item.word,
           color: getColorByGender("none"),
           isCorrect: item.gender === "none",
         },
         {
           text: "ambos",
+          subText: `${item.isPlural ? "as" : "a"} ${item.word} / ${
+            item.isPlural ? "os" : "o"
+          } ${item.word}`,
           color: getColorByGender("both"),
           isCorrect: item.gender === "both",
         },

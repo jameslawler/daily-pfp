@@ -42,6 +42,9 @@ function Game() {
   const getAnswerText = () =>
     currentQuestion.answers.find((answer) => answer.isCorrect)?.text;
 
+  const getAnswerSubText = () =>
+    currentQuestion.answers.find((answer) => answer.isCorrect)?.subText;
+
   const getAnswerBackgroundColor = () =>
     currentQuestion.answers.find((answer) => answer.isCorrect)?.color;
 
@@ -111,6 +114,7 @@ function Game() {
             onClick={() => answerQuestion(answerIndex)}
           >
             <span className="text-2xl font-bold">{answer.text}</span>
+            <span className="text-xl">{answer.subText}</span>
           </div>
         ))}
       </div>
@@ -121,9 +125,9 @@ function Game() {
             <div className="flex flex-col gap-2 my-4">
               <span className="text-center">The correct answer is</span>
               <span
-                className={`${getAnswerBackgroundColor()} text-xl text-center font-bold py-4`}
+                className={`${getAnswerBackgroundColor()} text-center text-xl font-bold py-4`}
               >
-                {currentQuestion.questionText} - {getAnswerText()}
+                {getAnswerSubText()} - {getAnswerText()}
               </span>
             </div>
             <span className="text-center">
