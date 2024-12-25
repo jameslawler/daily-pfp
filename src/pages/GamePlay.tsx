@@ -147,12 +147,12 @@ function Game() {
             </div>
           </div>
           <div className="flex flex-row gap-4 justify-center items-center p-4">
-            <Link to="study">
+            <Link to="/daily-pfp/game/gender/study">
               <div className="flex justify-center items-center bg-blue-800 text-white w-28 h-10 rounded-full cursor-pointer">
                 <span className="text-xl">Study</span>
               </div>
             </Link>
-            <Link to="stats">
+            <Link to="/daily-pfp/game/gender/stats">
               <div className="flex justify-center items-center bg-gray-100 border border-black text-black w-28 h-10 rounded-full cursor-pointer">
                 Statistics
               </div>
@@ -177,12 +177,12 @@ function Game() {
             </div>
           </div>
           <div className="flex flex-row gap-4 justify-center items-center p-4">
-            <Link to="study">
+            <Link to="/daily-pfp/game/gender/study">
               <div className="flex justify-center items-center bg-blue-800 text-white w-28 h-10 rounded-full cursor-pointer">
                 <span className="text-xl">Study</span>
               </div>
             </Link>
-            <Link to="stats">
+            <Link to="/daily-pfp/game/gender/stats">
               <div className="flex justify-center items-center bg-gray-100 border border-black text-black w-28 h-10 rounded-full cursor-pointer">
                 Statistics
               </div>
