@@ -252,7 +252,7 @@ export const data: GameData[] = [
     wordEnglish: "baby",
     category: "Family",
     isPlural: false,
-    gender: "male",
+    gender: "both",
   },
   {
     word: "menino",
