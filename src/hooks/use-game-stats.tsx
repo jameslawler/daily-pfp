@@ -24,9 +24,18 @@ const useGameStats = () => {
     return numberOfDays;
   };
 
+  const getLowScore = () =>
+    statsLocalStorage.pastGames.reduce(
+      (acc: number, pastGame: { score: number }) =>
+        pastGame.score < acc ? pastGame.score : acc,
+      0
+    );
+
   return {
+    lowScore: getLowScore(),
     topScore: statsLocalStorage.topScore,
     numberOfDaysStreak: getStreakDays(),
+    numberOfDaysPlayed: statsLocalStorage.pastGames.length,
   };
 };
 

@@ -1,6 +1,12 @@
 import { Link } from "react-router";
 import GameHeader from "../components/GameHeader";
+import { getStudyData } from "../domain/data-repository";
 
+const studyData = getStudyData();
+const numberOfWords = studyData.reduce(
+  (acc, studyCategory) => acc + studyCategory.data.length,
+  0
+);
 const monthMap = [
   "January",
   "February",
@@ -66,7 +72,7 @@ function GameMenu() {
             <div className="text-center font-bold">{getDate()}</div>
             <div className="text-center">New game every day</div>
             <div className="text-center">
-              Study the full list of 1200 words to improve each day
+              Study the full list of {numberOfWords} words to improve each day
             </div>
           </div>
         </div>
