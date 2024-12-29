@@ -52,7 +52,7 @@ function Game() {
     <div className="container mx-auto h-dvh">
       <div className="flex flex-col h-1/2 bg-gray-200">
         <div className="flex flex-col flex-1">
-          <GameHeader />
+          <GameHeader backUrl="/daily-pfp/game/gender" />
           <div className="flex flex-row h-12 items-center mx-4">
             <div className="flex flex-row flex-1 ">
               <span className="mr-2">Top Score:</span>
