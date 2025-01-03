@@ -6,36 +6,88 @@ const useGameStats = () => {
     `{ "topScore": 0, "pastGames": [] }`
   );
 
-  const getStreakDays = () => {
-    const date = new Date();
-    let numberOfDays = 0;
+  const getLongestStreakDays = () => {
+    let currentStreak = 0;
+    let longestStreak = 0;
+    let lastDate = null;
 
-    while (
-      statsLocalStorage.pastGames.find(
-        (game: { date: string }) =>
-          game.date === date.toISOString().split("T")[0]
-      )
-    ) {
-      numberOfDays++;
+    for (const pastGame of statsLocalStorage.pastGames) {
+      if (lastDate === null) {
+        currentStreak = 1;
+        longestStreak = 1;
+        lastDate = new Date(pastGame.date);
 
-      date.setDate(date.getDate() - 1);
+        continue;
+      }
+
+      lastDate.setDate(lastDate.getDate() + 1);
+
+      if (lastDate.toISOString().split("T")[0] === pastGame.date) {
+        currentStreak++;
+
+        if (currentStreak > longestStreak) {
+          longestStreak = currentStreak;
+        }
+      } else {
+        currentStreak = 1;
+      }
+
+      lastDate = new Date(pastGame.date);
     }
 
-    return numberOfDays;
+    return longestStreak;
   };
 
-  const getLowScore = () =>
-    statsLocalStorage.pastGames.reduce(
-      (acc: number, pastGame: { score: number }) =>
-        pastGame.score < acc ? pastGame.score : acc,
-      0
-    );
+  const getActivityLevel = (score: number) => {
+    if (score === 0) {
+      return 0;
+    }
+
+    if (score < 20) {
+      return 1;
+    }
+
+    if (score < 40) {
+      return 2;
+    }
+
+    if (score < 60) {
+      return 3;
+    }
+
+    return 4;
+  };
+
+  const getActivityData = (numberOfMonths: number) => {
+    const startDate = new Date();
+
+    startDate.setMonth(startDate.getMonth() - numberOfMonths);
+
+    return [
+      {
+        date: startDate.toISOString().split("T")[0],
+        count: 0,
+        level: 0,
+      },
+      ...statsLocalStorage.pastGames
+        .filter(
+          (pastGame: { date: string }) =>
+            new Date(pastGame.date).getTime() > startDate.getTime()
+        )
+        .map((pastGame: { date: string; score: number }) => ({
+          date: pastGame.date,
+          count: pastGame.score,
+          level: getActivityLevel(pastGame.score),
+        })),
+    ];
+  };
 
   return {
-    lowScore: getLowScore(),
     topScore: statsLocalStorage.topScore,
-    numberOfDaysStreak: getStreakDays(),
+    numberOfDaysLongestStreak: getLongestStreakDays(),
     numberOfDaysPlayed: statsLocalStorage.pastGames.length,
+    desktopActivity: getActivityData(10),
+    mobileActivity: getActivityData(4),
   };
 };
 
