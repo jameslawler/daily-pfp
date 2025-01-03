@@ -49,7 +49,7 @@ function GameStats() {
               </div>
             )}
           </div>
-          <div className="block md:hidden">
+          <div className="block md:hidden mx-auto">
             {mobileActivity.length > 0 && (
               <div>
                 <ActivityCalendar
