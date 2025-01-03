@@ -87,7 +87,7 @@ const useGameStats = () => {
     numberOfDaysLongestStreak: getLongestStreakDays(),
     numberOfDaysPlayed: statsLocalStorage.pastGames.length,
     desktopActivity: getActivityData(10),
-    mobileActivity: getActivityData(4),
+    mobileActivity: getActivityData(5),
   };
 };
 
