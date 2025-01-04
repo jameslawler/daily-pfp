@@ -1,6 +1,11 @@
+import ActivityCalendar from "react-activity-calendar";
+
 import GameHeader from "../components/GameHeader";
 import useGameStats from "../hooks/use-game-stats";
-import ActivityCalendar from "react-activity-calendar";
+
+import HighestScore from "/highest-score.svg";
+import LongestStreak from "/longest-streak.svg";
+import NumberDaysPlayed from "/number-days-played.svg";
 
 function GameStats() {
   const {
@@ -16,23 +21,45 @@ function GameStats() {
       <div className="flex flex-col flex-1">
         <GameHeader />
         <div className="flex flex-col gap-2 px-4 mt-8">
-          <div className="text-xl font-bold">Statistics</div>
-          <div className="flex flex-col gap-2 mb-10">
-            <div className="flex flex-row">
-              <span className="flex-1">Days Played</span>
-              <span className="flex-1">{numberOfDaysPlayed}</span>
+          <div className="text-xl font-bold mb-6">Statistics</div>
+          <div className="flex flex-row gap-2 mb-10">
+            <div className="flex flex-col flex-1 gap-4 justify-center items-center">
+              <span className="flex-1">
+                <img
+                  src={NumberDaysPlayed}
+                  className="w-8 h-8 md:w-20 md:h-20"
+                />
+              </span>
+              <span className="flex-1 font-bold text-sm md:text-lg">
+                Days Played
+              </span>
+              <span className="flex-1 text-md md:text-lg">
+                {numberOfDaysPlayed} days
+              </span>
             </div>
-            <div className="flex flex-row">
-              <span className="flex-1">Highest Score</span>
-              <span className="flex-1">{topScore}</span>
+            <div className="flex flex-col flex-1 gap-4 justify-center items-center">
+              <span className="flex-1">
+                <img src={HighestScore} className="w-8 h-8 md:w-20 md:h-20" />
+              </span>
+              <span className="flex-1 font-bold  text-sm md:text-lg">
+                Highest Score
+              </span>
+              <span className="flex-1 text-md md:text-lg">{topScore}</span>
             </div>
-            <div className="flex flex-row">
-              <span className="flex-1">Longest Streak</span>
-              <span className="flex-1">{numberOfDaysLongestStreak}</span>
+            <div className="flex flex-col flex-1 gap-4 justify-center items-center">
+              <span className="flex-1">
+                <img src={LongestStreak} className="w-8 h-8 md:w-20 md:h-20" />
+              </span>
+              <span className="flex-1 font-bold  text-sm md:text-lg">
+                Longest Streak
+              </span>
+              <span className="flex-1 text-md md:text-lg">
+                {numberOfDaysLongestStreak} days
+              </span>
             </div>
           </div>
           <div className="hidden md:block">
-            {desktopActivity.length > 0 && (
+            {numberOfDaysPlayed > 0 && (
               <div>
                 <ActivityCalendar
                   data={desktopActivity}
@@ -50,7 +77,7 @@ function GameStats() {
             )}
           </div>
           <div className="block md:hidden mx-auto">
-            {mobileActivity.length > 0 && (
+            {numberOfDaysPlayed > 0 && (
               <div>
                 <ActivityCalendar
                   data={mobileActivity}

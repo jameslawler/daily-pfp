@@ -10,6 +10,7 @@ type GameQuestionAnswer = {
 export type GameQuestion = {
   questionCategory: string;
   questionText: string;
+  questionTextEnglish?: string;
   answers: GameQuestionAnswer[];
 };
 
@@ -59,6 +60,7 @@ export const getGameQuestions = (date: Date): GameQuestion[] => {
     .map((item) => ({
       questionCategory: item.category,
       questionText: item.word,
+      questionTextEnglish: item.wordEnglish,
       answers: [
         {
           text: "feminino",

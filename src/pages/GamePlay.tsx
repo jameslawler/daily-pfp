@@ -27,6 +27,7 @@ function Game() {
 
   const [scoreEffect, setScoreEffect] = useState("");
   const [plusoneEffect, setPlusoneEffect] = useState("hidden");
+  const [showEnglish, setShowEnglish] = useState(false);
   const { setEnabled, timeRemainingFormatted } = useCountdown();
 
   useEffect(() => {
@@ -78,8 +79,15 @@ function Game() {
               </span>
             </div>
             <div className="relative mt-8">
-              <span className="text-5xl font-bold">
-                {currentQuestion.questionText}
+              <span
+                className="text-5xl font-bold"
+                onMouseDown={() => setShowEnglish(true)}
+                onMouseUp={() => setShowEnglish(false)}
+                onTouchStart={() => setShowEnglish(true)}
+                onTouchEnd={() => setShowEnglish(false)}
+              >
+                {!showEnglish && currentQuestion.questionText}
+                {showEnglish && currentQuestion.questionTextEnglish}
               </span>
               <span
                 className={`${plusoneEffect} absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 text-2xl text-green-500 font-bold`}
