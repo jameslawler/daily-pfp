@@ -95,6 +95,13 @@ function GameStats() {
               </div>
             )}
           </div>
+          <div>
+            {mobileActivity.map((activity) => (
+              <div>
+                {activity.date} - {activity.count} - {activity.level}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
