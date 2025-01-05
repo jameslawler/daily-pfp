@@ -39,10 +39,6 @@ const useGameStats = () => {
   };
 
   const getActivityLevel = (score: number) => {
-    if (score === 0) {
-      return 0;
-    }
-
     if (score < 20) {
       return 1;
     }
