@@ -69,7 +69,13 @@ function Game() {
               </div>
             </div>
           </div>
-          <div className="flex flex-col flex-1 justify-center items-center">
+          <div
+            className="flex flex-col flex-1 justify-center items-center"
+            onMouseDown={() => setShowEnglish(true)}
+            onMouseUp={() => setShowEnglish(false)}
+            onTouchStart={() => setShowEnglish(true)}
+            onTouchEnd={() => setShowEnglish(false)}
+          >
             <div className="bg-white rounded-full">
               <img src={Person} className="w-12 h-12" />
             </div>
@@ -79,13 +85,7 @@ function Game() {
               </span>
             </div>
             <div className="relative mt-8">
-              <span
-                className="text-5xl font-bold"
-                onMouseDown={() => setShowEnglish(true)}
-                onMouseUp={() => setShowEnglish(false)}
-                onTouchStart={() => setShowEnglish(true)}
-                onTouchEnd={() => setShowEnglish(false)}
-              >
+              <span className="text-5xl font-bold">
                 {!showEnglish && currentQuestion.questionText}
                 {showEnglish && currentQuestion.questionTextEnglish}
               </span>
