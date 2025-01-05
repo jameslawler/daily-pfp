@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 function Home() {
   return (
-    <div className="container mx-auto h-dvh bg-gray-200">
+    <div className="container mx-auto h-dvh">
       <div className="flex flex-col flex-1">
         <div>Choose a Game</div>
         <div>

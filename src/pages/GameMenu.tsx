@@ -33,7 +33,7 @@ function getDate() {
 
 function GameMenu() {
   return (
-    <div className="container mx-auto h-dvh bg-gray-200">
+    <div className="container mx-auto h-dvh">
       <div className="flex flex-col h-full">
         <GameHeader backUrl="/daily-pfp" />
         <div className="flex flex-col flex-1 gap-14 justify-center items-center px-4">

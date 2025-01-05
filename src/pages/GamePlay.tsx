@@ -50,8 +50,8 @@ function Game() {
     currentQuestion.answers.find((answer) => answer.isCorrect)?.color;
 
   return (
-    <div className="container mx-auto h-dvh">
-      <div className="flex flex-col h-1/2 bg-gray-200">
+    <div className="container mx-auto h-full">
+      <div className="flex flex-col h-4/6">
         <div className="flex flex-col flex-1">
           <GameHeader backUrl="/daily-pfp/game/gender" />
           <div className="flex flex-row h-12 items-center mx-4">
@@ -115,14 +115,15 @@ function Game() {
           ></div>
         </div>
       </div>
-      <div className="grid grid-cols-2 grid-rows-2 h-1/2 bg-white">
+      <div className="grid grid-cols-2 grid-rows-2 bg-white h-2/6">
         {currentQuestion.answers.map((answer, answerIndex) => (
           <div
+            key={answer.color}
             className={`flex flex-col ${answer.color} justify-center items-center cursor-pointer`}
             onClick={() => answerQuestion(answerIndex)}
           >
             <span className="text-2xl font-bold">{answer.text}</span>
-            <span className="text-xl">{answer.subText}</span>
+            <span className="text-xl text-center">{answer.subText}</span>
           </div>
         ))}
       </div>

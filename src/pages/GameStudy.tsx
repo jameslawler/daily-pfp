@@ -25,7 +25,7 @@ const getFullWord = (item: GameData) => {
 
 function GameStudy() {
   return (
-    <div className="container mx-auto min-h-dvh bg-gray-200">
+    <div className="container mx-auto min-h-dvh">
       <div className="flex flex-col flex-1">
         <GameHeader />
         <div className="flex flex-col gap-4 px-4 mt-6">
@@ -39,13 +39,16 @@ function GameStudy() {
           </div>
           <div className="flex flex-col gap-4">
             {studyData.map((studyCategory) => (
-              <div>
+              <div key={studyCategory.category}>
                 <span className="text-xl font-bold mb-4">
                   {studyCategory.category}
                 </span>
                 <div className="flex flex-col gap-2">
                   {studyCategory.data.map((item) => (
-                    <div className="flex flex-row p-2 justify-center items-center">
+                    <div
+                      key={item.word}
+                      className="flex flex-row p-2 justify-center items-center"
+                    >
                       <div
                         className={`w-10 h-10 mr-2 ${item.color} rounded-md`}
                       ></div>
