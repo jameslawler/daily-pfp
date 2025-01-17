@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route
-          path="/daily-pfp"
+          path="/"
           element={
             <MasterPage>
               <Home />
@@ -21,7 +21,7 @@ function App() {
           }
         />
         <Route
-          path="/daily-pfp/game/:gameName"
+          path="/game/:gameName"
           element={
             <MasterPage>
               <GameMenu />
@@ -29,7 +29,7 @@ function App() {
           }
         />
         <Route
-          path="/daily-pfp/game/:gameName/play"
+          path="/game/:gameName/play"
           element={
             <MasterPage isFullScreen>
               <GamePlay />
@@ -37,7 +37,7 @@ function App() {
           }
         />
         <Route
-          path="/daily-pfp/game/:gameName/study"
+          path="/game/:gameName/study"
           element={
             <MasterPage>
               <GameStudy />
@@ -45,7 +45,7 @@ function App() {
           }
         />
         <Route
-          path="/daily-pfp/game/:gameName/stats"
+          path="/game/:gameName/stats"
           element={
             <MasterPage>
               <GameStats />
@@ -53,7 +53,7 @@ function App() {
           }
         />
         <Route
-          path="/daily-pfp/game/:gameName/help"
+          path="/game/:gameName/help"
           element={
             <MasterPage>
               <GameHelp />

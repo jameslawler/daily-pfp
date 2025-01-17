@@ -35,9 +35,9 @@ function GameMenu() {
   return (
     <div className="container mx-auto h-dvh">
       <div className="flex flex-col h-full">
-        <GameHeader backUrl="/daily-pfp" />
+        <GameHeader backUrl="/" />
         <div className="flex flex-col flex-1 gap-14 justify-center items-center px-4">
-          <div className="flex flex-col gap-4 justify-center items-center">
+          <div className="flex flex-col gap-16 justify-center items-center">
             <div className="text-4xl font-bold text-center">
               Feminino ou Masculino
             </div>

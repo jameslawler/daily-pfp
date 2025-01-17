@@ -53,7 +53,7 @@ function Game() {
     <div className="container mx-auto h-full">
       <div className="flex flex-col h-4/6">
         <div className="flex flex-col flex-1">
-          <GameHeader backUrl="/daily-pfp/game/gender" />
+          <GameHeader backUrl="/game/gender" />
           <div className="flex flex-row h-12 items-center mx-4">
             <div className="flex flex-row flex-1 ">
               <span className="mr-2">Top Score:</span>
@@ -156,12 +156,12 @@ function Game() {
             </div>
           </div>
           <div className="flex flex-row gap-4 justify-center items-center p-4">
-            <Link to="/daily-pfp/game/gender/study">
+            <Link to="/game/gender/study">
               <div className="flex justify-center items-center bg-blue-800 text-white w-28 h-10 rounded-full cursor-pointer">
                 <span className="text-xl">Study</span>
               </div>
             </Link>
-            <Link to="/daily-pfp/game/gender/stats">
+            <Link to="/game/gender/stats">
               <div className="flex justify-center items-center bg-gray-100 border border-black text-black w-28 h-10 rounded-full cursor-pointer">
                 Statistics
               </div>
@@ -186,12 +186,12 @@ function Game() {
             </div>
           </div>
           <div className="flex flex-row gap-4 justify-center items-center p-4">
-            <Link to="/daily-pfp/game/gender/study">
+            <Link to="/game/gender/study">
               <div className="flex justify-center items-center bg-blue-800 text-white w-28 h-10 rounded-full cursor-pointer">
                 <span className="text-xl">Study</span>
               </div>
             </Link>
-            <Link to="/daily-pfp/game/gender/stats">
+            <Link to="/game/gender/stats">
               <div className="flex justify-center items-center bg-gray-100 border border-black text-black w-28 h-10 rounded-full cursor-pointer">
                 Statistics
               </div>

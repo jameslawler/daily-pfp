@@ -27,15 +27,15 @@ function GameHeader({ backUrl }: Props) {
         </div>
       )}
       <div className="flex flex-1 justify-center items-center">
-        <span className="text-xl font-bold">Feminino ou Masculino</span>
+        <span className="text-xl font-bold"></span>
       </div>
       <div className="cursor-pointer hover:bg-gray-100">
-        <Link to="/daily-pfp/game/gender/stats">
+        <Link to="/game/gender/stats">
           <img src={Stats} className="w-10 h-10" />
         </Link>
       </div>
       <div className="cursor-pointer hover:bg-gray-100">
-        <Link to="/daily-pfp/game/gender/help">
+        <Link to="/game/gender/help">
           <img src={Help} className="w-10 h-10" />
         </Link>
       </div>
