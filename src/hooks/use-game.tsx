@@ -3,6 +3,14 @@ import { useLocalStorage } from "./use-local-storage";
 import { DailyGame, GameState } from "../domain/daily-game";
 import { GameQuestion } from "../domain/data-repository";
 
+declare global {
+  interface Window { plausible: any; }
+}
+
+window.plausible = window.plausible || function() {
+  (window.plausible.q = window.plausible.q || []).push(arguments)
+}
+
 const useGame = (game: DailyGame) => {
   const [seconds, setSeconds] = useState(0);
   const [currentScore, setCurrentScore] = useState(0);
@@ -83,11 +91,16 @@ const useGame = (game: DailyGame) => {
     setSeconds(0);
     updateState();
 
+    if (game.gameState === "ended") {
+      window.plausible('Gender Game Finished');
+    }
+
     setGameStorageValue({
       lastGame: currentDate.toISOString().split("T")[0],
       lastQuestionIndex: game.questionIndex,
       gameState: game.gameState,
     });
+
     setStatsLocalStorage({
       topScore:
         currentScore > statsLocalStorage.topScore
