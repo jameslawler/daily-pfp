@@ -92,7 +92,7 @@ const useGame = (game: DailyGame) => {
     updateState();
 
     if (game.gameState === "ended") {
-      window.plausible('Gender Game Finished');
+      window.plausible('Gender Game Finished', { props: { score: currentScore }});
     }
 
     setGameStorageValue({
