@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router";
 
 import Back from "/back.svg";
 import Help from "/help.svg";
-import Stats from "/stats.svg";
+import Stats from "/highest-score.svg";
 
 interface Props {
   backUrl?: string;

@@ -59,7 +59,7 @@ const useGameStats = () => {
 
     startDate.setMonth(startDate.getMonth() - numberOfMonths);
 
-    return [
+    const activities = [
       {
         date: startDate.toISOString().split("T")[0],
         count: 0,
@@ -76,6 +76,18 @@ const useGameStats = () => {
           level: getActivityLevel(pastGame.score),
         })),
     ];
+
+    if (activities.length === 1) {
+      activities.push({
+        date: new Date().toISOString().split("T")[0],
+        count: 0,
+        level: 0,
+      });
+    }
+
+    console.log(activities);
+
+    return activities;
   };
 
   return {

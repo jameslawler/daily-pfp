@@ -33,7 +33,7 @@ function getDate() {
 
 function GameMenu() {
   return (
-    <div className="container mx-auto h-dvh">
+    <div className="container mx-auto">
       <div className="flex flex-col h-full">
         <GameHeader backUrl="/" />
         <div className="flex flex-col flex-1 gap-14 justify-center items-center px-4">
@@ -42,7 +42,7 @@ function GameMenu() {
               Feminino ou Masculino
             </div>
             <div className="text-xl text-center">
-              How many words can you get right{" "}
+              How many words can you answer correctly{" "}
               <span className="font-bold">without</span> a mistake?
             </div>
           </div>

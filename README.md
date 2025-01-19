@@ -7,29 +7,8 @@ todo
 - DONE top score number
 - DONE colors of buttons
 - DONE statistics page
-- load words
+- DONE load words
 - DONE change list daily
-
-Statistics
-
-- key: "gender-game-statistics"
-- value:
-  {
-  topScore: number,
-  pastGames: [{
-  date: string,
-  score: number,
-  }]
-  }
-
-Architecture
-
-Game Data (any json format)
-Game Question (fixed format)
-Game Study (fixed format)
-
-1. Create array of Game Questions by loading n entries of Game Data into Game Question format
-2. Create Game by providing Game Question aray and current state
-3. Create Game Study array by loading all Game Data into Game Study format
-
----
+- verify word list
+- update category icons
+- DONE add attribution page to game menu and help page

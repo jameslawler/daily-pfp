@@ -7,6 +7,7 @@ import GameStudy from "../pages/GameStudy";
 import GameStats from "../pages/GameStats";
 import GameHelp from "../pages/GameHelp";
 import MasterPage from "../components/MasterPage";
+import GameAttributions from "../pages/GameAttributions";
 
 function App() {
   return (
@@ -57,6 +58,14 @@ function App() {
           element={
             <MasterPage>
               <GameHelp />
+            </MasterPage>
+          }
+        />
+        <Route
+          path="/attributions"
+          element={
+            <MasterPage>
+              <GameAttributions />
             </MasterPage>
           }
         />
