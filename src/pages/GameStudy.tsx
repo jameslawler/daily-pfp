@@ -41,7 +41,7 @@ function GameStudy() {
             {studyData.map((studyCategory) => (
               <div key={studyCategory.category}>
                 <span className="text-xl font-bold mb-4">
-                  {studyCategory.category}
+                  {studyCategory.categoryText}
                 </span>
                 <div className="flex flex-col gap-2">
                   {studyCategory.data.map((item) => (

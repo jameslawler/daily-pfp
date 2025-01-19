@@ -1,5 +1,19 @@
 import { data, GameData, Gender } from "./data";
 
+import Emergency from "/emergency.svg";
+import Family from "/family.svg";
+import Food from "/food.svg";
+import HouseGarden from "/house.svg";
+import Medical from "/medical.svg";
+import Money from "/money.svg";
+import Occupations from "/occupations.svg";
+import Person from "/person.svg";
+import PersonalCare from "/personal-care.svg";
+import Relationships from "/relationships.svg";
+import School from "/school.svg";
+import Shopping from "/shopping.svg";
+import Space from "/space.svg";
+
 type GameQuestionAnswer = {
   text: string;
   subText: string;
@@ -7,8 +21,13 @@ type GameQuestionAnswer = {
   isCorrect: boolean;
 };
 
+type GameQuestionCategory = {
+  text: string;
+  icon: string;
+};
+
 export type GameQuestion = {
-  questionCategory: string;
+  questionCategory: GameQuestionCategory;
   questionText: string;
   questionTextEnglish?: string;
   answers: GameQuestionAnswer[];
@@ -25,6 +44,81 @@ const getColorByGender = (gender: Gender) => {
     case "none":
       return "bg-violet-400";
   }
+};
+
+const getCategoryByCategoryId = (categoryId: string): GameQuestionCategory => {
+  switch (categoryId) {
+    case "human-body":
+      return {
+        text: "Human Body",
+        icon: Person,
+      };
+    case "family":
+      return {
+        text: "Family",
+        icon: Family,
+      };
+    case "relationships-life":
+      return {
+        text: "Relationships & Life",
+        icon: Relationships,
+      };
+    case "personal-care":
+      return {
+        text: "Personal Care",
+        icon: PersonalCare,
+      };
+    case "medical":
+      return {
+        text: "Medical",
+        icon: Medical,
+      };
+    case "house-garden":
+      return {
+        text: "House & Garden",
+        icon: HouseGarden,
+      };
+    case "emergency":
+      return {
+        text: "Emergency",
+        icon: Emergency,
+      };
+    case "money":
+      return {
+        text: "Money",
+        icon: Money,
+      };
+    case "shopping":
+      return {
+        text: "Shopping",
+        icon: Shopping,
+      };
+    case "food-drink":
+      return {
+        text: "Food & Drink",
+        icon: Food,
+      };
+    case "school-work":
+      return {
+        text: "School & Work",
+        icon: School,
+      };
+    case "occupations":
+      return {
+        text: "Occupations",
+        icon: Occupations,
+      };
+    case "earth-space":
+      return {
+        text: "Earth & Space",
+        icon: Space,
+      };
+  }
+
+  return {
+    text: "Word",
+    icon: Person,
+  };
 };
 
 const shuffleArray = (array: GameData[], seed: number): GameData[] => {
@@ -58,7 +152,7 @@ export const getGameQuestions = (date: Date): GameQuestion[] => {
   return shuffleData
     .filter((_, index) => index < WORDS_PER_GAME)
     .map((item) => ({
-      questionCategory: item.category,
+      questionCategory: getCategoryByCategoryId(item.category),
       questionText: item.word,
       questionTextEnglish: item.wordEnglish,
       answers: [
@@ -102,6 +196,7 @@ type StudyGameData = {
 
 type GroupedData = {
   category: string;
+  categoryText: string;
   data: StudyGameData[];
 };
 
@@ -120,6 +215,7 @@ const groupByCategory = (data: GameData[]) =>
       } else {
         acc.push({
           category,
+          categoryText: getCategoryByCategoryId(category).text,
           data: [
             {
               ...item,

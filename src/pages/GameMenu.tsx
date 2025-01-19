@@ -72,7 +72,8 @@ function GameMenu() {
             <div className="text-center font-bold">{getDate()}</div>
             <div className="text-center">New game every day</div>
             <div className="text-center">
-              Study the full list of {numberOfWords} words to improve each day
+              Study the <Link to="study">full list</Link> of {numberOfWords}{" "}
+              words to improve each day
             </div>
           </div>
         </div>

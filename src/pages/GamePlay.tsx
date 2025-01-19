@@ -13,6 +13,7 @@ import useGameStats from "../hooks/use-game-stats";
 
 const todayString = new Date().toISOString().split("T")[0];
 const genderGame = new DailyGame(getGameQuestions(new Date(todayString)));
+
 function Game() {
   const {
     startGame,
@@ -81,7 +82,7 @@ function Game() {
             </div>
             <div className="mt-1">
               <span className="text-xl">
-                {currentQuestion.questionCategory}
+                {currentQuestion.questionCategory.text}
               </span>
             </div>
             <div className="relative mt-8">
