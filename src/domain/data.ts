@@ -2250,7 +2250,7 @@ export const data: GameData[] = [
     gender: "male",
   },
   {
-    word: "padaria",
+    word: "pastelaria",
     wordEnglish: "bakery",
     category: "shopping",
     isPlural: false,
@@ -2383,14 +2383,14 @@ export const data: GameData[] = [
     gender: "male",
   },
   {
-    word: "bachalau",
+    word: "bacalhau",
     wordEnglish: "cod fish",
     category: "food-drink",
     isPlural: false,
     gender: "male",
   },
   {
-    word: "carangeujo",
+    word: "caranguejo",
     wordEnglish: "crab",
     category: "food-drink",
     isPlural: false,
@@ -3094,7 +3094,7 @@ export const data: GameData[] = [
     wordEnglish: "weather",
     category: "earth-space",
     isPlural: false,
-    gender: "female",
+    gender: "male",
   },
   {
     word: "vento",
