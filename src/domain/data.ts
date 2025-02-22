@@ -2240,7 +2240,7 @@ export const data: GameData[] = [
     wordEnglish: "promotions",
     category: "shopping",
     isPlural: true,
-    gender: "male",
+    gender: "female",
   },
   {
     word: "carrinho",
